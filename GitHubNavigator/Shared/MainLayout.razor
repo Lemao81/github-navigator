@@ -1,11 +1,14 @@
 ﻿@inherits LayoutComponentBase
 
-<MudThemeProvider Theme="_theme"/>
+<MudThemeProvider Theme="_theme" IsDarkMode="_isDarkMode"/>
 
 <MudLayout>
     <MudAppBar>
-        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Size="Size.Large" Edge="Edge.Start" OnClick="@ToggleDrawer"></MudIconButton>
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Size="Size.Large" Edge="Edge.Start" OnClick="@ToggleDrawer"/>
         GitHub Navigator
+        <MudSpacer/>
+        <MudToggleIconButton Toggled="_isDarkMode" Icon="@Icons.Material.Filled.DarkMode" ToggledIcon="@Icons.Material.Filled.WbSunny" Color="Color.Inherit" ToggledColor="Color.Warning"
+                             Size="Size.Large" ToggledSize="Size.Large" Edge="Edge.End" ToggledChanged="@ToggleDarkMode"/>
     </MudAppBar>
     <MudDrawer Open="@_isDrawerOpen">
         <MudDrawerHeader>
