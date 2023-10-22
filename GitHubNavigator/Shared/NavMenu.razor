@@ -1,5 +1,9 @@
 ﻿<MudNavMenu Margin="Margin.Normal">
     <MudNavLink Href="/" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Home">Home</MudNavLink>
+    <MudNavGroup Title="Search" Expanded="true" Icon="@Icons.Material.Filled.Search">
+        <MudNavLink Href="/search/users" Match="NavLinkMatch.Prefix">Users</MudNavLink>
+        <MudNavLink Href="/search/repositories" Match="NavLinkMatch.Prefix">Repositories</MudNavLink>
+    </MudNavGroup>
     <MudNavLink Href="/counter" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Calculate">Counter</MudNavLink>
     <MudNavLink Href="/fetchdata" Match="NavLinkMatch.Prefix" Icon="@Icons.Material.Filled.Cloud">Fetch Data</MudNavLink>
 </MudNavMenu>

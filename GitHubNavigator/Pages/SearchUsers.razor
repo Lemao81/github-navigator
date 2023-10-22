@@ -1,0 +1,15 @@
+﻿@page "/search/users"
+@using GitHubNavigator.Domain.Interfaces
+
+@inject ISearchUsersService SearchUsersService
+@inject ISnackbar Snackbar
+
+<MudContainer MaxWidth="MaxWidth.Small">
+    <MudStack Row="false">
+        <MudTextField @bind-Value="@AccessToken" Label="Access token" Variant="Variant.Text"/>
+        <MudStack Row="true">
+            <MudTextField @bind-Value="@SearchText" Label="Search text" Variant="Variant.Text" InputType="InputType.Search" Immediate="true" OnKeyDown="@OnKeyDownAsync"/>
+            <MudIconButton Icon="@Icons.Material.Filled.PlayArrow" Size="Size.Medium" Color="Color.Inherit" Disabled="@string.IsNullOrEmpty(SearchText)" OnClick="@StartSearchAsync"/>
+        </MudStack>
+    </MudStack>
+</MudContainer>

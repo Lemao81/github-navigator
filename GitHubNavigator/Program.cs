@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using GitHubNavigator;
+using GitHubNavigator.Domain.Interfaces;
+using GitHubNavigator.Domain.Services;
 using GitHubNavigator.Extensions;
 using MudBlazor.Services;
 
@@ -9,9 +11,11 @@ builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddMudServices();
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddGraphQLClient();
 
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+builder.Services.AddScoped<ISearchUsersService, SearchUsersService>();
+builder.Services.AddScoped<IGitHubGraphQLQueryService, GitHubGraphQLQueryService>();
 
 await builder.Build().RunAsync();
