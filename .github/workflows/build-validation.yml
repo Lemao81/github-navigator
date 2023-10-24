@@ -7,6 +7,7 @@ on:
       - '**.cs'
       - '**.csproj'
       - '**.razor'
+  workflow_dispatch:
 
 env:
   DOTNET_VERSION: '7.0.401'
