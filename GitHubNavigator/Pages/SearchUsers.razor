@@ -11,5 +11,17 @@
             <MudTextField @bind-Value="@SearchText" Label="Search text" Variant="Variant.Text" InputType="InputType.Search" Immediate="true" OnKeyDown="@OnKeyDownAsync"/>
             <MudIconButton Icon="@Icons.Material.Filled.PlayArrow" Size="Size.Medium" Color="Color.Inherit" Disabled="@string.IsNullOrEmpty(SearchText)" OnClick="@StartSearchAsync"/>
         </MudStack>
+        <MudList>
+            @foreach (var user in _users)
+            {
+                <MudListItem Style="padding-bottom: 0;">
+                    <MudStack Row="false" Spacing="1">
+                        <MudText>@user.Login</MudText>
+                        <MudText Typo="Typo.body2" Class="bold">@user.Name</MudText>
+                    </MudStack>
+                </MudListItem>
+            }
+        </MudList>
+        <MudPagination Class="mt-1" Variant="Variant.Outlined" Count="@_totalPageCount" bind-Selected="@_currentPage" SelectedChanged="UpdateUsersPage" />
     </MudStack>
 </MudContainer>
