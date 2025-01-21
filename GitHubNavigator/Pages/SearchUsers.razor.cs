@@ -9,7 +9,7 @@ public partial class SearchUsers
 {
     private string AccessToken { get; set; } = "";
     private string SearchText { get; set; } = "";
-    private List<UserViewModel> _usersTotal = new();
+    private readonly List<UserViewModel> _usersTotal = new();
     private ObservableCollection<UserViewModel> _users = new();
     private int _totalPageCount = 1;
     private int _currentPage = 1;
@@ -43,18 +43,12 @@ public partial class SearchUsers
 
     private void UpdateUsersPage(int page)
     {
+        if (page < 1) throw new ArgumentOutOfRangeException(nameof(page));
+
         if (_usersTotal.Count < PageSize)
         {
             _currentPage = 1;
             _users = new ObservableCollection<UserViewModel>(_usersTotal);
-
-            return;
-        }
-
-        if (page < 1)
-        {
-            _currentPage = 1;
-            _users = new ObservableCollection<UserViewModel>(_usersTotal.Take(PageSize));
 
             return;
         }

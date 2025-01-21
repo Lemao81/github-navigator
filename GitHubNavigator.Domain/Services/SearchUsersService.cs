@@ -7,10 +7,12 @@ namespace GitHubNavigator.Domain.Services;
 public class SearchUsersService : ISearchUsersService
 {
     private readonly IGitHubGraphQLQueryService _gitHubGraphQlQueryService;
+    private readonly StateContainer _stateContainer;
 
-    public SearchUsersService(IGitHubGraphQLQueryService gitHubGraphQlQueryService)
+    public SearchUsersService(IGitHubGraphQLQueryService gitHubGraphQlQueryService, StateContainer stateContainer)
     {
         _gitHubGraphQlQueryService = gitHubGraphQlQueryService;
+        _stateContainer = stateContainer;
     }
 
     public async Task<Result<List<UserViewModel>>> SearchUsersAsync(string searchText, string accessToken)
@@ -20,6 +22,9 @@ public class SearchUsersService : ISearchUsersService
         {
             return Result<List<UserViewModel>>.Failure(result.Error!);
         }
+
+        _stateContainer.SearchedUsers.Clear();
+        _stateContainer.SearchedUsers.AddRange(result.Value!);
 
         var viewModels = result.Value!.Select(u => u.MapToViewModel()).ToList();
 

@@ -13,6 +13,8 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 builder.Services.AddMudServices();
 builder.Services.AddGraphQLClient();
 
+builder.Services.AddSingleton<StateContainer>();
+
 builder.Services.AddScoped(_ => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 builder.Services.AddScoped<ISearchUsersService, SearchUsersService>();
